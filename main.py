@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import glob
-
+import os
 def read_csv_file(filename):
     #reading each CSV file as a Pandas dataframe
     df = pd.read_csv(filename)
@@ -11,7 +11,8 @@ def read_csv_file(filename):
             .rename_axis(None, axis=1)
             .reset_index())
     #get the date from the directory name
-    date =  filename.split('/')[1].strip()
+    date =  filename.split(os.sep)[-2]
+        #filename.split('/')[1].strip()
     df.insert(loc=0, column='date', value=date)
     return df
 
